@@ -3,7 +3,13 @@ var router = require('koa-router')()
 router.prefix('/users')
 
 router.get('/login', function * (next) {
-  this.body = 'this is a users/login response!'
+  let data = {
+    status: 0,
+    error: '',
+    data: {}
+  }
+  data = JSON.stringify(data)
+  this.body = data
 })
 
 router.get('/register', function * (next) {
