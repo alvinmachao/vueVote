@@ -35,6 +35,7 @@ export default {
       router.push('/')
       state.isLogin = true
       state.userInfo = user.data
+      local.updateLocalInfo({isLogin: state.isLogin, userInfo: state.userInfo})
       alert('您的编号是' + user.data.id)
     } else {
       alert(user.msg)

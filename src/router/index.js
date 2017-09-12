@@ -41,15 +41,18 @@ router.beforeEach((to, from, next) => {
     var docEle = doc.documentElement || doc.body
     var fn = function () {
       var width = docEle.clientWidth
-      if (width > 640) {
-        docEle.style.fontSize = 100 + 'px'
-        return
-      }
       width && (docEle.style.fontSize = 100 * (width / 640) + 'px')
     }
     win.addEventListener('resize', fn, false)
     doc.addEventListener('DOMContentLoaded', fn, false)
   }(document, window))
+  var path = to.path
+  /**
+   * 没有登录的情况 不能进去个人中心页面
+   */
+  if ((path.indexOf('homePage') >= 0)) {
+    router.push('/')
+  }
   next()
 })
 export default router
