@@ -1,31 +1,33 @@
 <template>
   <ul class="userList">
-    <div v-if="!isLoading">
-      <ul class="userList clear">
-        <items v-for="item in searchList" :item="item" :key="item.ID"></items>
-      </ul>
-      {{content}}
-    </div>
-    <div v-else="!isLoading">
+    <div v-if="isLoading" style="text-align: center;line-height: 30px">
       loading....
+    </div>
+    <div v-else="isLoading">
+      <div v-if="searchList.length===0" style="text-align: center;line-height: 50px">没有查到任何用户信息</div>
+      <ul v-else="searchList.length===0" class="userList clear">
+        <items v-for="item in searchList" :item="item" :key="item.id"></items>
+      </ul>
     </div>
 
   </ul>
 </template>
 <script>
   import items from '../common/UserListItem.vue'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'search',
     data () {
       return {
-        searchList: [],
-        isLoading: false,
-        content: null,
-        error: null
+        isLoading: true
       }
     },
-    computed: {},
+    computed: {
+      searchList () {
+        return this.$store.state.searchedUserInfo
+      }
+    },
     components: {items},
     watch: {
       '$route': 'fetchData'
@@ -34,50 +36,10 @@
       this.fetchData()
     },
     methods: {
+      ...mapActions(['getSearchedUsers']),
       fetchData () {
-        this.error = this.content = null
-        this.isLoading = true
-        this.searchList = [
-          {
-            'ID': '1',
-            'name': 'a1',
-            'selectedIDs': [
-              '1',
-              '2',
-              '3',
-              '4',
-              '5'
-            ],
-            'sex': 0,
-            'voteID': [
-              '1',
-              '2',
-              '5',
-              '7',
-              '9',
-              '10',
-              '12'
-            ]
-          },
-          {
-            'ID': '2',
-            'name': 'a2',
-            'voteID': [
-              '1',
-              '2',
-              '6'
-            ],
-            'sex': '1',
-            'selectedIDs': [
-              '1',
-              '2',
-              '6',
-              '5',
-              '8'
-            ]
-          }]
+        this.getSearchedUsers(this.$route.params.content.split(':')[1])
         this.isLoading = false
-        console.log(this.$route.params.content)
       }
     }
   }

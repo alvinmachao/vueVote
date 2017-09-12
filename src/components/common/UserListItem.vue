@@ -1,17 +1,17 @@
 <template>
   <li class="ListItem clear">
-    <div class="li_f li_ll" :class="item.sex?'boy':'girl'"></div>
+    <div class="li_f li_ll" :class="item.sex==1?'boy':'girl'"></div>
 
     <div class="li_f li_rr">
       <div class="li_r_tt">
-        <span>{{item.name}}</span><i>编号#<b>{{item.ID}}</b></i>
+        <span>{{item.account}}</span><i>编号#<b>{{item.id}}</b></i>
 
         <div>{{item.voteID.length}}票</div>
       </div>
       <div class="li_r_bb">
         <span>{{item.des}}</span>
 
-        <div>投TA一票
+        <div @click="voteTickets">投TA一票
         </div>
       </div>
     </div>
@@ -19,9 +19,24 @@
 
 </template>
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     name: 'items',
-    props: ['item']
+    props: ['item'],
+    methods: {
+      ...mapActions(['vote']),
+      voteTickets (e) {
+        if (!this.$store.state.isLogin) {
+          this.$store.commit('SHOW_LOGIN')
+          return
+        }
+        var curE = e.target
+        var curId = this.$store.state.userInfo.id
+        var targetId = curE.parentNode.previousElementSibling.getElementsByTagName('b')[0].innerHTML
+        this.vote({curId, targetId})
+      }
+    }
   }
 </script>
 <style lang="less" scoped>

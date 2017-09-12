@@ -1,7 +1,7 @@
 <template>
   <div class="IndexPage">
 
-    <Modal v-show="this.showLogin">
+    <Modal v-if="this.showLogin">
       <Login></Login>
     </Modal>
     <div class="index_container">
@@ -20,10 +20,10 @@
         </router-link>
       </div>
       <div class="SearchBox clear">
-        <input type="text" id="searchInput"/><a href="javascript:;">搜索</a>
+        <input type="text" id="searchInput"/><a href="javascript:;" @click="search">搜索</a>
       </div>
     </div>
-    <Users></Users>
+    <Users :allUsers="allUsers"></Users>
   </div>
 </template>
 
@@ -31,14 +31,20 @@
   import Users from '@/components/common/Users'
   import Modal from '@/components/common/Modal'
   import Login from '@/components/common/Login'
-  import { mapMutations } from 'vuex'
+  import { mapMutations, mapActions } from 'vuex'
 
   export default {
     name: 'index',
     data () {
       return {}
     },
+    created () {
+      this.getAllUser()
+    },
     computed: {
+      allUsers () {
+        return this.$store.state.allUsers
+      },
       showLogin () {
         return this.$store.state.showLogin
       },
@@ -55,9 +61,21 @@
       Login
     },
     methods: {
-      ...mapMutations(['LOGIN_LOGIN']),
+      ...mapMutations(['SHOW_LOGIN']),
+      ...mapActions(['getAllUser']),
       login () {
-        this.LOGIN_LOGIN()
+        if (this.isLogin) {
+          this.$router.push('/homePage:' + this.$store.state.userInfo.id)
+        } else {
+          this.SHOW_LOGIN()
+        }
+      },
+      search (e) {
+        var value = e.target.previousElementSibling.value
+        if (value === '') {
+          return
+        }
+        this.$router.push('/search:' + value)
       }
     }
 

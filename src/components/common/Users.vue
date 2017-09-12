@@ -1,12 +1,12 @@
 <template>
   <ul class="userList">
-    <div v-if="!isLoading">
+    <div v-if="!isNoData">
       <ul class="userList clear">
-        <items v-for="item in userList" :item="item" :key="item.ID"></items>
+        <items v-for="item in allUsers" :item="item" :key="item.id"></items>
       </ul>
     </div>
-    <div v-else="!isLoading">
-      loading....
+    <div v-else="!isNoData" style="text-align: center ;line-height: 30px">
+      暂无任何用户信息
     </div>
 
   </ul>
@@ -17,93 +17,21 @@
   export default {
     name: 'users',
     data () {
-      return {
-        userList: [],
-        isLoading: false,
-        error: null
+      return {}
+    },
+    computed: {
+      isNoData () {
+        if (this.allUsers.length >= 1) {
+          return false
+        } else {
+          return true
+        }
       }
     },
-    created () {
-      this.getUsers()
-    },
+    props: ['allUsers'],
+    watched: {},
     components: {items},
-    methods: {
-      getUsers () {
-        this.error = null
-        this.isLoading = true
-        var vu = this
-        setTimeout(function () {
-          vu.userList = [
-            {
-              'ID': '1',
-              'name': 'a1',
-              'selectedIDs': [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5'
-              ],
-              'sex': 0,
-              'voteID': [
-                '1',
-                '2',
-                '5',
-                '7',
-                '9',
-                '10',
-                '12'
-              ]
-            },
-            {
-              'ID': '2',
-              'name': 'a2',
-              'voteID': [
-                '1',
-                '2',
-                '6'
-              ],
-              'sex': '1',
-              'selectedIDs': [
-                '1',
-                '2',
-                '6',
-                '5',
-                '8'
-              ]
-            },
-            {
-              'ID': '3',
-              'name': 'a3',
-              'voteID': [
-                '1',
-                '10'
-              ],
-              'sex': 0,
-              'selectedIDs': [
-                '5',
-                '7',
-                '8'
-              ]
-            },
-            {
-              'ID': '4',
-              'name': 'a4',
-              'voteID': [
-                '1',
-                '10'
-              ],
-              'sex': 1,
-              'selectedIDs': [
-                '5',
-                '7',
-                '8'
-              ]
-            }]
-          vu.isLoading = false
-        }, 1000)
-      }
-    }
+    methods: {}
   }
 </script>
 <style lang="less" scoped>

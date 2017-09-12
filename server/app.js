@@ -4,7 +4,7 @@ var json = require('koa-json')
 var views = require('koa-views')
 var onerror = require('koa-onerror')
 
-var index = require('./routes/index')
+var actions = require('./routes/actions')
 var users = require('./routes/users')
 
 // error handler
@@ -29,7 +29,7 @@ app.use(function * (next) {
 app.use(require('koa-static')(__dirname + '/public'))
 
 // routes definition
-app.use(index.routes(), index.allowedMethods())
+app.use(actions.routes(), actions.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
 module.exports = app

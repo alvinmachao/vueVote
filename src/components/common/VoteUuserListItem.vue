@@ -1,10 +1,10 @@
 <template>
   <li class="VotedListItem clear">
-    <div class="li_f li_l" :class="item.sex?'boy':'girl'"></div>
+    <div class="li_f li_l" :class="item.sex==1?'boy':'girl'"></div>
 
     <div class="li_f li_m">
       <div class="li_m_t">
-        <span>{{item.name}}</span><i>编号#<b>{{item.ID}}</b></i>
+        <span>{{item.account}}</span><i>编号#<b>{{item.id}}</b></i>
 
       </div>
     </div>

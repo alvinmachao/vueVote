@@ -15,6 +15,7 @@
 </template>
 <script>
   import Crypto from 'crypto'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'login',
@@ -28,6 +29,7 @@
     },
     components: {},
     methods: {
+      ...mapActions(['login']),
       submit () {
         if (this.account.trim() === '') {
           return
@@ -42,7 +44,7 @@
           account,
           password
         }
-        console.log(obj)
+        this.login(obj)
       }
     }
   }

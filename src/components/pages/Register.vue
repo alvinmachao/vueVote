@@ -4,7 +4,7 @@
     <div class="form">
       <div class="box">
         <label for="account">用户名：</label>
-        <input type="text" v-model="account" id="account" name="account" v-validate="'required|alpha_dash'">
+        <input type="text" v-model="account" id="account" name="account" v-validate="'required|account'">
 
         <p class="prompt" v-show="errors.has('account')">{{ errors.first('account') }}</p>
       </div>
@@ -50,6 +50,7 @@
   import VeeValidate, { Validator } from 'vee-validate'
   import messages from 'vee-validate/dist/locale/zh_CN'
   import Crypto from 'crypto'
+  import { mapActions } from 'vuex'
 
   Validator.addLocale(messages)
   Validator.updateDictionary({
@@ -72,6 +73,14 @@
       return (value.length === 11) && /^1[0-9]{10}$/.test(value)
     }
   })
+  Validator.extend('account', {
+    messages: {
+      zh_CN: field => field + '由汉字字母下划线组成'
+    },
+    validate: value => {
+      return /^[\u4e00-\u9fa5a-zA-Z_]+$/.test(value)
+    }
+  })
   const config = {
     errorBagName: 'errors',
     delay: 0,
@@ -92,6 +101,7 @@
     },
     name: 'register',
     methods: {
+      ...mapActions(['register', 'isExist']),
       submit () {
         var bok = this.$validator.errors.any()
         if (bok) {
@@ -106,11 +116,11 @@
         var phone = this.phone.trim()
         var des = this.des.trim()
         var sex = this.sex.trim()
-        console.log(account)
-        console.log(password)
-        console.log(phone)
-        console.log(des)
-        console.log(sex)
+        var user = {account, password, phone, des, sex}
+        this.register(user)
+      },
+      check (e) {
+        this.isExist(e)
       }
     },
     computed: {}
