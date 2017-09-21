@@ -1,1 +1,96 @@
-[{"id":1,"selectedIDs":["1","6","2","3","4"],"voteID":[2,6,1,5]},{"id":2,"selectedIDs":["1","2","3","4","5"],"voteID":[2,6,1]},{"id":3,"selectedIDs":[],"voteID":[2,6,1]},{"id":4,"selectedIDs":[],"voteID":[2,6,1]},{"id":5,"selectedIDs":["1","6"],"voteID":[2,6]},{"id":6,"selectedIDs":["1","2","4","3","5"],"voteID":[1,5]},{"id":7,"selectedIDs":[],"voteID":[]},{"id":8,"selectedIDs":[],"voteID":[]},{"id":9,"selectedIDs":[],"voteID":[]}]
+[
+  {
+    "id": 1,
+    "selectedIDs": [
+      "1",
+      "6",
+      "2",
+      "3",
+      "4"
+    ],
+    "voteID": [
+      2,
+      6,
+      1,
+      5
+    ]
+  },
+  {
+    "id": 2,
+    "selectedIDs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "voteID": [
+      2,
+      6,
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "selectedIDs": [],
+    "voteID": [
+      2,
+      6,
+      1
+    ]
+  },
+  {
+    "id": 4,
+    "selectedIDs": [],
+    "voteID": [
+      2,
+      6,
+      1
+    ]
+  },
+  {
+    "id": 5,
+    "selectedIDs": [
+      "1",
+      "6"
+    ],
+    "voteID": [
+      2,
+      6
+    ]
+  },
+  {
+    "id": 6,
+    "selectedIDs": [
+      "1",
+      "2",
+      "4",
+      "3",
+      "5"
+    ],
+    "voteID": [
+      1,
+      5
+    ]
+  },
+  {
+    "id": 7,
+    "selectedIDs": [],
+    "voteID": []
+  },
+  {
+    "id": 8,
+    "selectedIDs": [],
+    "voteID": []
+  },
+  {
+    "id": 9,
+    "selectedIDs": [],
+    "voteID": []
+  },
+  {
+    "id": 10,
+    "selectedIDs": [],
+    "voteID": []
+  }
+]
