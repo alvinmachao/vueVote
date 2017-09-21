@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      -webkit-touch-callout: none;
+      -webkit-user-select: auto;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+<a href="##">click</a>
+<div>aa</div>
+<script>
+
+  class Test {
+    constructor () {
+      this.gen = this.f1()
+      this.gen.next()
+    }
+
+    * noop () {}
+
+    * f1 () {
+      console.log('1: pre')
+      yield * this.f2()
+      console.log('1: after')
+    }
+
+    * f2 () {
+      console.log('2: pre')
+      yield * this.f3()
+      console.log('2: after')
+    }
+
+    * f3 () {
+      console.log('3: pre')
+      console.log('3: after')
+    }
+  }
+
+  let test = new Test()
+
+  function getArray (curIndex, max) {
+    var arr = []
+    if (curIndex - 3 > 0) {
+      arr.push(curIndex - 3)
+    }
+    if (curIndex - 2 > 0) {
+      arr.push(curIndex - 2)
+    }
+    if (curIndex - 1 > 0) {
+      arr.push(curIndex - 1)
+    }
+    arr.push(curIndex)
+    if (curIndex + 1 <= max) {
+      arr.push(curIndex + 1)
+    }
+    if (curIndex + 2 <= max) {
+      arr.push(curIndex + 2)
+    }
+    if (curIndex + 3 <= max) {
+      arr.push(curIndex + 3)
+    }
+    return arr
+  }
+
+  console.log(getArray(19, 20))
+
+
+</script>
+</body>
+</html>

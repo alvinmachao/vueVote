@@ -1,10 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/pages/index'
-import Search from '@/components/pages/Searches'
-import Rule from '@/components/pages/Rule'
-import Register from '@/components/pages/Register'
-import HomePage from '@/components/pages/PHomePage'
 
 Vue.use(Router)
 const router = new Router({
@@ -13,23 +8,33 @@ const router = new Router({
     {
       path: '/',
       name: 'index',
-      component: Index
+      component: function (resolve) {
+        require(['@/components/pages/index'], resolve)
+      }
     }, {
       path: '/search:content',
       name: 'search',
-      component: Search
+      component: function (resolve) {
+        require(['@/components/pages/Searches'], resolve)
+      }
     }, {
       path: '/rule',
       name: 'rule',
-      component: Rule
+      component: function (resolve) {
+        require(['@/components/pages/Rule'], resolve)
+      }
     }, {
       path: '/register',
       name: 'register',
-      component: Register
+      component: function (resolve) {
+        require(['@/components/pages/Register'], resolve)
+      }
     }, {
       path: '/homePage:id',
       name: 'homepage',
-      component: HomePage
+      component: function (resolve) {
+        require(['@/components/pages/PHomePage'], resolve)
+      }
     }
   ]
 })

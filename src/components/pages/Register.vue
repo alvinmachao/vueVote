@@ -110,6 +110,15 @@
         if (this.account === '') {
           return
         }
+        if (this.des === '') {
+          return
+        }
+        if (this.password === '') {
+          return
+        }
+        if (this.phone === '') {
+          return
+        }
         var md5 = Crypto.createHash('md5')
         var password = md5.update(this.password.trim()).digest('hex')
         var account = this.account.trim()

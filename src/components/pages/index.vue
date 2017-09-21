@@ -23,7 +23,10 @@
         <input type="text" id="searchInput"/><a href="javascript:;" @click="search">搜索</a>
       </div>
     </div>
-    <Users :allUsers="allUsers"></Users>
+    <div v-if="isLoading">Loading...</div>
+    <div v-else="isLoading">
+      <Users :allUsers="allUsers"></Users>
+    </div>
   </div>
 </template>
 
@@ -36,10 +39,11 @@
   export default {
     name: 'index',
     data () {
-      return {}
+      return {isLoading: true}
     },
     created () {
       this.getAllUser()
+      this.isLoading = false
     },
     computed: {
       allUsers () {

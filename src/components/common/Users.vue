@@ -2,7 +2,7 @@
   <ul class="userList">
     <div v-if="!isNoData">
       <ul class="userList clear">
-        <items v-for="item in allUsers" :item="item" :key="item.id"></items>
+        <li is="items" v-for="item in allUsers" :item="item" :key="item.id"></li>
       </ul>
     </div>
     <div v-else="!isNoData" style="text-align: center ;line-height: 30px">
